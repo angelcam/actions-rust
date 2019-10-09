@@ -1,4 +1,4 @@
-FROM angelcam/rust-baseimage:latest
+FROM angelcam/rust-ci:latest
 
 COPY entrypoint.sh /entrypoint.sh
 

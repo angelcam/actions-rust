@@ -1,15 +1,62 @@
-on: [push]
+on: [pull_request]  # more suitable for private repos
+#on: [push]  # push is fine for the public repos
+
+name: Rust workflow for Example
 
 jobs:
-  hello_world_job:
+  ci:
+    name: CI
     runs-on: ubuntu-latest
-    name: A job to say hello
+
     steps:
-    - name: Hello world action step
-      id: hello
+    - uses: actions/checkout@v1
+
+# dummy action which will show the version -> remove it on production
+    - name: Version
+      id: version
       uses: angelcam/actions-rust@master
       with:
-        who-to-greet: 'Mona the Octocat'
-    # Use the output from the `hello` step
-    - name: Get the output time
-      run: echo "The time was ${{ steps.hello.outputs.time }}"
+        command: -V
+
+# uncomment below
+
+#    - name: Fmt
+#      id: fmt
+#      uses: angelcam/actions-rust@master
+#      with:
+#        command: fmt
+#        args: --all -- --check
+#
+#    - name: Build
+#      id: build
+#      uses: angelcam/actions-rust@master
+#      with:
+#        command: build
+#        args: --all-features --release
+#
+#    - name: Test
+#      id: test
+#      uses: angelcam/actions-rust@master
+#      with:
+#        command: test
+#        args: --all-features
+#
+#    - name: Clippy
+#      id: clippy
+#      uses: angelcam/actions-rust@master
+#      with:
+#        command: clippy
+#        args: -- -D warnings
+#
+#    - name: Audit
+#      id: audit
+#      uses: angelcam/actions-rust@master
+#      with:
+#        command: audit
+#
+#    - name: Udeps
+#      id: udeps
+#      uses: angelcam/actions-rust@master
+#      with:
+#        command: udeps
+#        toolchain: +nightly

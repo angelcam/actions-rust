@@ -1,15 +1,21 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'Perform rust commands'
+description: 'Performs the commands and checks the output'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  toolchain:
+    description: 'Toolchain to run'
+    required: false
+    default: ''
+  command:
+    description: 'Cargo command to trigger'
     required: true
-    default: 'World'
-outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  args:
+    description: 'Arguments for cargo cmd'
+    required: false
+    default: ''
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.who-to-greet }}
+    - ${{ inputs.toolchain }}
+    - ${{ inputs.command }}
+    - ${{ inputs.args }}
