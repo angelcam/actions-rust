@@ -9,8 +9,10 @@ echo "${INPUTS_SSH_KEY}" > ~/.ssh/id_rsa
 chmod 700 ~/.ssh/
 chmod 600 ~/.ssh/id_rsa
 
-sleep 1
-
 set -ex
+
+wc -l ~/.ssh/id_rsa
+git clone git@github.com:angelcam/rust-ac-http-server.git /tmp/testik
+
 
 cargo $1 $2 $3
