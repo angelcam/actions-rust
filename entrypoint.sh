@@ -8,6 +8,9 @@ mkdir -p ~/.ssh/
 echo "${INPUT_SSH_KEY}" > ~/.ssh/id_rsa
 chmod 700 ~/.ssh/
 chmod 600 ~/.ssh/id_rsa
+ssh-keygen -R github.com
+echo "Host github.com" > ~/.ssh/config
+echo "    StrictHostKeyChecking no" >> ~/.ssh/config
 
 set -ex
 
