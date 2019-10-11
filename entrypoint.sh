@@ -12,7 +12,11 @@ ssh-keygen -R github.com
 echo "Host github.com" > ~/.ssh/config
 echo "    StrictHostKeyChecking no" >> ~/.ssh/config
 
+
 set -ex
+
+eval `ssh-agent -s`
+ssh-add
 
 wc -l ~/.ssh/id_rsa
 git clone git@github.com:angelcam/rust-ac-http-server.git /tmp/testik
