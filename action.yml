@@ -12,6 +12,10 @@ inputs:
     description: 'Arguments for cargo cmd'
     required: false
     default: ''
+  ssh_key:
+    description: 'SSH key for private repos'
+    required: false
+    default: ''
 runs:
   using: 'docker'
   image: 'Dockerfile'
