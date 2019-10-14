@@ -21,9 +21,4 @@ echo "git-fetch-with-cli = true" >> /root/.cargo/config
 
 set -ex
 
-#TODO remove these two lines
-wc -l ~/.ssh/id_rsa
-git clone git@github.com:angelcam/rust-ac-http-server.git /tmp/testik
-
-
 cargo $1 $2 $3
