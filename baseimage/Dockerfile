@@ -97,3 +97,9 @@ RUN bash -l -c 'echo $(rustc --print sysroot)/lib >> /etc/ld.so.conf' && \
 # set required env variable
 ENV FFMPEG_INCLUDE_DIR "/ffmpeg/install/include"
 ENV FFMPEG_LIB_DIR "/ffmpeg/install/lib"
+
+# Set configs
+COPY cargo.config /root/.cargo/config
+RUN mkdir -p /root/.ssh \
+	&& chmod 0700 /root/.ssh
+COPY ssh.config /root/.ssh/config
