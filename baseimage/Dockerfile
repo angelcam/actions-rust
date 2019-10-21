@@ -69,15 +69,12 @@ RUN mkdir -p /ffmpeg/build \
 	&& rm -rf /ffmpeg/build
 
 # install rustup
-RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
+RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain none --profile minimal
 
 ENV PATH "/root/.cargo/bin:$PATH"
 ENV CFG_RELEASE_CHANNEL "stable"
 
 # install rust versions and components
-#
-# TODO once rustup will integrate support for profiles into stable
-# don't delete doc-files, just use minimal profile (no docs installed)
 ARG rust_version
 RUN rustup install nightly \
 	&& rustup install $rust_version \
@@ -85,8 +82,7 @@ RUN rustup install nightly \
 	&& rustup component add clippy \
 	&& rustup component add rustfmt \
 	&& cargo install cargo-audit \
-	&& cargo install cargo-udeps \
-    && rm -rf  /root/.rustup/toolchains/*/share/doc
+	&& cargo install cargo-udeps
 
 # ld config
 RUN bash -l -c 'echo $(rustc --print sysroot)/lib >> /etc/ld.so.conf' && \
